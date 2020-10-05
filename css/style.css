@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  background-color: whitesmoke;
+  justify-content: space-between;
+}
+
+.range {
+  display: relative;
+  width: 900px;
+  vertical-align: middle;
+}
+
+.key-img {
+  position: absolute;
+  width: 50px;
+  left: 50px;
+  margin-top: 155px;
+  /* animation-name: ; */
+}
+
+.pianoCont {
+  display: flex;
+  vertical-align: center;
+
+}
+
+.piano-key {
+  width: 40px;
+  animation-name: press 4s;
+}
+
+@keyframes press {
+  0%   {opacity: 1;}
+  25%  {opacity: .6;}
+  50%  {opacity: .7;}
+  100% {opacity: 1;}
+}
