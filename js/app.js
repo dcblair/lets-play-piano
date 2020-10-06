@@ -55,24 +55,22 @@ const audioCHi = document.querySelector("#audio-chi")
 const note13 = audioContext.createMediaElementSource(audioCHi)
 note13.connect(audioContext.destination)
 
-// create computer keys images
-let keyImgA = document.createElement("img")
-keyImgA.setAttribute("class", "key-img")
-keyImgA.setAttribute("src", "./images/key-img-a.png")
-document.querySelector(".range").appendChild(keyImgA)
-
 // create piano key container
 let pianoContainer = document.createElement("div")
-pianoContainer.setAttribute("class", "pianoCont")
+pianoContainer.setAttribute("class", "pianoContainer")
 document.body.appendChild(pianoContainer)
 
 
 // create piano key images
-let pianoKeyA = document.createElement("img")
-pianoKeyA.setAttribute("class", "piano-key")
-pianoKeyA.setAttribute("src", "./images/piano-key-a.png")
+// let pianoKeyA = document.createElement("img")
 
+// let pianoKeyW = document.createElement("img")
 
+function startGame(e) {
+  if (e.key === "spacebar") {
+  
+  }
+}
 
 function handleKey(e) {
   if (e.key === "a") {
@@ -111,14 +109,27 @@ function handleKey(e) {
   if (e.key === "k") {
     audioCHi.play();
   }
-
 }
 
+// game = {
+//   mary: [keyImgE, keyImgD, keyImgC, keyImgD, keyImgE, keyImgE, keyImgE],
+//   start() {
+    
+//   }
+// }
+
+
+// for (let i = 0; i < keyArray.length; i++) {
+
+// }
+
+// if (keyPressA > 4 || keyPressA < 6) {
+//   playerScore+= 10
+// }
 
 document.addEventListener("keydown", handleKey)
 
-
-pianoContainer.appendChild(pianoKeyA) 
+document.addEventListener("keypress", startGame)
 
 console.log("Yay!")
 
