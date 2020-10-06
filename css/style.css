@@ -1,37 +1,55 @@
 body {
+  align-items: center;
   display: flex;
-  background-color: whitesmoke;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .range {
-  display: relative;
+  position: relative;
+  padding: 30px;
   width: 900px;
-  vertical-align: middle;
 }
 
 .key-img {
   position: absolute;
-  width: 50px;
-  left: 50px;
-  margin-top: 155px;
-  /* animation-name: ; */
+  width: 60px;
+  left: -30px;
+  margin-top: 150px;
+  animation: keyPress 10s;
 }
 
-.pianoCont {
-  display: flex;
-  vertical-align: center;
+@keyframes keyPress {
+  0%   {left: 0px;}
+  100% {left: 900px;}
+}
 
+.pianoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 500px;
+  padding: 40px;
+  vertical-align: center;
+  
 }
 
 .piano-key {
-  width: 40px;
-  animation-name: press 4s;
+  display: flex;
+  width: 50px;
+  animation-name: press 10s;
+}
+
+.black-key {
+  display: absolute;
+  height: 180px;
+  width: 45px;
+  overflow: visible;
 }
 
 @keyframes press {
-  0%   {opacity: 1;}
-  25%  {opacity: .6;}
-  50%  {opacity: .7;}
-  100% {opacity: 1;}
+  0%   {opacity: 0;}
+  25%  {opacity: .5;}
+  50%  {opacity: .7}
+  100% {opacity: 1}
 }
