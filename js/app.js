@@ -1,3 +1,17 @@
+// window load alert
+
+/*
+window.onload = alert(`Let's play piano! Instructions
+
+Watch the keys float across the screen. As the keys reach
+the green section, press the same letter key on your keyboard.
+If your timing is right, you win 2 points!
+If you miss or press the wrong key, you lose 2 points.
+Don't let your score get to 0!
+
+Press the spacebar to start (press again to reset game)`)
+*/
+
 // enable audio
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
@@ -66,25 +80,73 @@ score.setAttribute("class", "score")
 score.innerHTML="10"
 document.querySelector(".range").appendChild(score)
 
-// create piano key images
-// let pianoKeyA = document.createElement("img")
+// create key images
+let keyImgA = document.createElement("img")
+keyImgA.setAttribute("src", "./images/key-img-a.png")
 
-// let pianoKeyW = document.createElement("img")
+let keyImgD = document.createElement("img")
+keyImgD.setAttribute("src", "./images/key-img-d.png")
+
+let keyImgS = document.createElement("img")
+keyImgS.setAttribute("src", "./images/key-img-s.png")
+
+let keyImgE = document.createElement("img")
+keyImgE.setAttribute("src", "./images/key-img-e.png")
 
 
 
-function startGame(e) {
-  if (e.key === "spacebar") {
-  
-  }
+let timer = 0;
+
+function setUpTimer(time) {
+  timer = time
+  const timeInterval = setInterval(() => {
+    if (timer === 10) {
+      clearInterval(timeInterval)
+      // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
+    } else {
+      timer++
+      console.log(timer)
+    }
+  }, 1000)
+  console.log(timer)
 }
 
+game = {
+  score: 0,
+  timer: 0,
+  mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD],
+  start: function(e) {
+    if (e.keyCode === 32) {
+      game.moveKey();
+      // new function const checkE = setInterval
+      // time = interval; set interval for 5 secs
+      // check var tied to e being pressed
+      // startTimer();
+      // timer++
+      // if (timer === 10) {
+      // stopTimer();
+      // }
+    }
+  },
+  moveKey: function() {
+      document.querySelector(".range").appendChild(keyImgE)
+      keyImgE.classList.add("key-pressed");
+      setUpTimer(0)
+  },
+  hitKey: function() {
+    keyImgE.classList.remove(".key-pressed")
+    keyImgE.classList.add("correct-press")
+  },
+    
+  
+}
+
+
+// currPress = "" ; global?
 function handleKey(e) {
   if (e.key === "a") {
     audioC.play();
-  } else if ("keyup" === true) {
-    audioC.stop();
-  } 
+  }
   if (e.key === "w") {
     audioCSh.play();
   }
@@ -118,27 +180,17 @@ function handleKey(e) {
   }
 }
 
-// game = {
-//   score: 0;
-//   timer: 10;
-//   mary: [keyImgE, keyImgD, keyImgC, keyImgD, keyImgE, keyImgE, keyImgE],
-//   start() {
-    
-//   }
-// }
-
-
 // for (let i = 0; i < keyArray.length; i++) {
 
 // }
 
 // if (keyPressA > 4 || keyPressA < 6) {
-//   playerScore+= 10
+//   playerScore+= 5
 // }
 
+
+//event listener for piano key functions
 document.addEventListener("keydown", handleKey)
 
-document.addEventListener("keypress", startGame)
-
-console.log("Yay!")
-
+//space bar event listener for game start
+document.addEventListener("keypress", game.start)

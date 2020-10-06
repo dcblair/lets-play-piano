@@ -12,16 +12,35 @@ body {
 }
 
 .key-img {
-  animation: keyPress 10s;
-  left: -30px;
+  left: 50px;
   margin-top: 150px;
   position: absolute;
   width: 60px;
 }
 
+.key-pressed {
+  left: 0px;
+  margin-top: 150px;
+  position: absolute;
+  width: 60px;
+  animation: keyPress 11s;
+}
+
 @keyframes keyPress {
   0%   {left: 0px;}
-  100% {left: 900px;}
+  100% {left: 710px;}
+}
+
+.correct-press {
+  animation: correct 5s;
+}
+
+@keyframes correct {
+  0%   {opacity: 1}  
+  25%  {opacity: 2}
+  50%  {opacity: 1}
+  75%  {opacity: .5}
+  100% {opacity: 0;}
 }
 
 #scoreContainer {
