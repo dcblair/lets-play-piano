@@ -66,6 +66,8 @@ document.body.appendChild(pianoContainer)
 
 // let pianoKeyW = document.createElement("img")
 
+
+
 function startGame(e) {
   if (e.key === "spacebar") {
   
@@ -112,6 +114,8 @@ function handleKey(e) {
 }
 
 // game = {
+//   score: 0;
+//   timer: 10;
 //   mary: [keyImgE, keyImgD, keyImgC, keyImgD, keyImgE, keyImgE, keyImgE],
 //   start() {
     

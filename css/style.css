@@ -6,17 +6,17 @@ body {
 }
 
 .range {
+  padding: 40px 0px 60px 0px;
   position: relative;
-  padding: 30px;
   width: 900px;
 }
 
 .key-img {
-  position: absolute;
-  width: 60px;
+  animation: keyPress 10s;
   left: -30px;
   margin-top: 150px;
-  animation: keyPress 10s;
+  position: absolute;
+  width: 60px;
 }
 
 @keyframes keyPress {
@@ -24,14 +24,49 @@ body {
   100% {left: 900px;}
 }
 
+#scoreContainer {
+  position: absolute;
+  right: -150px;
+}
+
 .pianoContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 500px;
-  padding: 40px;
+  padding: 40px 0px 20px 0px;
   vertical-align: center;
   
+}
+
+.volumeControl {
+  align-self: center;
+  position: relative;
+  padding: 100px;
+  margin-left: 270px;
+  width: 50px;
+}
+
+#piano-vol {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} 
+
+#volume-level {
+  position: relative;
+  
+}
+
+#slider {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+}
+
+#speaker-horn {
+  position: absolute;
+  top: -40px;
 }
 
 .piano-key {
@@ -44,7 +79,6 @@ body {
   display: absolute;
   height: 180px;
   width: 45px;
-  overflow: visible;
 }
 
 @keyframes press {
