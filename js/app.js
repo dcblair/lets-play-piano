@@ -60,6 +60,11 @@ let pianoContainer = document.createElement("div")
 pianoContainer.setAttribute("class", "pianoContainer")
 document.body.appendChild(pianoContainer)
 
+// create score text
+let score = document.createElement("div")
+score.setAttribute("class", "score")
+score.innerHTML="10"
+document.querySelector(".range").appendChild(score)
 
 // create piano key images
 // let pianoKeyA = document.createElement("img")

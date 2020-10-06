@@ -6,6 +6,7 @@
   <title>Document</title>
   <script src="js/app.js" defer></script>
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 <body>
 <h2></h2>
@@ -33,9 +34,12 @@
   <div class="volumeControl">
     <img id="speaker-horn" src="./images/speaker-horn.png" alt="">
     <img id="slider" src="./images/vol-line.png" alt="">
-    <img id="volume-level" src="./images/vol-bar.png" alt="">
+    <img id="volume-level" src="./images/vol-bar.png" alt="" class="input" type="range" id="volume" min="0" max="2" value="1" list="gain-vals" step="0.01" data-action="volume"/>
+    <datalist id="gain-vals">
+      <option value="0" label="min">
+      <option value="2" label="max">
+    </datalist>
   </div>
-</div>
   <audio id="audio-c" src="./sounds/c-piano.wav"></audio>
   <audio id="audio-csh" src="./sounds/csh-piano.wav"></audio>
   <audio id="audio-d" src="./sounds/d-piano.wav"></audio>
