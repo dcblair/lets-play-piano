@@ -19,7 +19,7 @@ body {
 }
 
 .key-pressed {
-  left: 0px;
+  left: 20px;
   margin-top: 150px;
   position: absolute;
   width: 60px;
@@ -27,7 +27,7 @@ body {
 }
 
 @keyframes keyPress {
-  0%   {left: 3px;}
+  0%   {left: 20px;}
   100% {left: 600px;}
 }
 
