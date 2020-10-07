@@ -23,12 +23,12 @@ body {
   margin-top: 150px;
   position: absolute;
   width: 60px;
-  animation: keyPress 11s;
+  animation: keyPress 5s;
 }
 
 @keyframes keyPress {
-  0%   {left: 0px;}
-  100% {left: 710px;}
+  0%   {left: 3px;}
+  100% {left: 600px;}
 }
 
 .correct-press {
@@ -101,15 +101,20 @@ body {
 }
 
 .piano-key {
-  display: flex;
+  display: absolute;
   width: 50px;
-  animation-name: press 4s;
+}
+
+.piano-press {
+  display: absolute;
+  width: 50px;
+  animation-name: press 10s;
 }
 
 @keyframes press {
   0%   {opacity: 1;}
-  25%  {opacity: .5;}
-  50%  {opacity: .3}
+  25%  {opacity: .5}
+  50%  {opacity: .1}
   100% {opacity: 1}
 }
 

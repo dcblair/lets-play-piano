@@ -83,6 +83,7 @@ document.querySelector(".range").appendChild(score)
 // create key images
 let keyImgA = document.createElement("img")
 keyImgA.setAttribute("src", "./images/key-img-a.png")
+keyImgA.innerHTML="a"
 
 let keyImgD = document.createElement("img")
 keyImgD.setAttribute("src", "./images/key-img-d.png")
@@ -93,30 +94,63 @@ keyImgS.setAttribute("src", "./images/key-img-s.png")
 let keyImgE = document.createElement("img")
 keyImgE.setAttribute("src", "./images/key-img-e.png")
 
-
-
-let timer = 0;
-
-function setUpTimer(time) {
-  timer = time
-  const timeInterval = setInterval(() => {
-    if (timer === 10) {
-      clearInterval(timeInterval)
-      // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
-    } else {
-      timer++
-      console.log(timer)
-    }
-  }, 1000)
-  console.log(timer)
-}
-
 game = {
   score: 0,
-  timer: 0,
-  mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD],
+  timer: 1,
+  currKeyImg: [],
+  mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgS, keyImgD],
+  setUpTimer: function (time) {
+    game.timer = time
+    const timeInterval = setInterval(() => {
+      if (game.timer === 5) {
+        clearInterval(timeInterval)
+        // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
+      } 
+      // if (game.timer < 3) {
+      //   console.log("Hey!")
+      //   score++
+      // } else if (game.timer > 2) {
+      //   console.log("oi!")
+      //   }
+      else {
+        game.timer++
+        } console.log(game.timer)
+      }, 1000)
+  },
+  moveKey: function() { 
+    let moveTime = 0;
+    let interval = setInterval(function() { 
+      if (moveTime <= game.mary.length) { 
+        document.querySelector(".range").appendChild(game.mary[moveTime])
+        game.mary[moveTime].classList.add("key-pressed");
+        // game.mary[i].setAttribute("data-value", i)
+        console.log(game.mary[moveTime])
+      moveTime++;
+      } else { 
+      clearInterval(interval);
+      
+      }
+    }, 2000)
+    // for (let i = 0; i < game.mary.length; i++) {
+    //   setTimeout(function() {
+    //   document.querySelector(".range").appendChild(game.mary[i])
+    //   game.mary[i].classList.add("key-pressed");
+    //   // game.mary[i].setAttribute("data-value", i)
+    //   console.log(game.mary[i])
+    //   game.setUpTimer(1)
+    //   }, 500)
+    // }
+  },
+  hitKey: function() {
+    game.mary.classList.remove("key-pressed")
+    game.mary.classList.add("correct-press")
+
+  },
+  compare: function() {
+  },
   start: function(e) {
     if (e.keyCode === 32) {
+      
       game.moveKey();
       // new function const checkE = setInterval
       // time = interval; set interval for 5 secs
@@ -128,24 +162,18 @@ game = {
       // }
     }
   },
-  moveKey: function() {
-      document.querySelector(".range").appendChild(keyImgE)
-      keyImgE.classList.add("key-pressed");
-      setUpTimer(0)
-  },
-  hitKey: function() {
-    keyImgE.classList.remove(".key-pressed")
-    keyImgE.classList.add("correct-press")
-  },
-    
   
 }
+
 
 
 // currPress = "" ; global?
 function handleKey(e) {
   if (e.key === "a") {
     audioC.play();
+    let pianoKeyA = document.querySelector(".piano-key")
+    pianoKeyA.classList.remove("piano-key")
+    pianoKeyA.classList.add("piano-press")
   }
   if (e.key === "w") {
     audioCSh.play();
@@ -188,9 +216,12 @@ function handleKey(e) {
 //   playerScore+= 5
 // }
 
+// document.addEventListener("keydown", )
+document.addEventListener("keydown", game.compare)
 
 //event listener for piano key functions
 document.addEventListener("keydown", handleKey)
 
 //space bar event listener for game start
 document.addEventListener("keypress", game.start)
+
