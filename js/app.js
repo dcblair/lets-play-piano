@@ -74,6 +74,7 @@ let pianoContainer = document.createElement("div")
 pianoContainer.setAttribute("class", "pianoContainer")
 document.body.appendChild(pianoContainer)
 
+
 // create score text
 let score = document.createElement("div")
 score.setAttribute("class", "score")
@@ -83,24 +84,24 @@ document.querySelector(".range").appendChild(score)
 // create key images
 let keyImgA = document.createElement("img")
 keyImgA.setAttribute("src", "./images/key-img-a.png")
-keyImgA.setAttribute("value", "a")
+keyImgA.setAttribute("alt", "a")
 
 let keyImgD = document.createElement("img")
 keyImgD.setAttribute("src", "./images/key-img-d.png")
-keyImgD.setAttribute("value", "d")
+keyImgD.setAttribute("alt", "d")
 
 let keyImgS = document.createElement("img")
 keyImgS.setAttribute("src", "./images/key-img-s.png")
-keyImgS.setAttribute("value", "s")
+keyImgS.setAttribute("alt", "s")
 
 let keyImgE = document.createElement("img")
 keyImgE.setAttribute("src", "./images/key-img-e.png")
-keyImgE.setAttribute("value", "e")
+keyImgE.setAttribute("alt", "e")
 
 let keyImgG = document.createElement("img")
 keyImgG.setAttribute("src", "./images/key-img-g.png")
-keyImgG.setAttribute("value", "g")
-console.log(typeof keyImgG.value)
+keyImgG.setAttribute("alt", "g")
+
 
 //check if key is pressed
 let isPressed = false;
