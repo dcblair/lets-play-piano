@@ -83,39 +83,56 @@ document.querySelector(".range").appendChild(score)
 // create key images
 let keyImgA = document.createElement("img")
 keyImgA.setAttribute("src", "./images/key-img-a.png")
-keyImgA.innerHTML="a"
+keyImgA.setAttribute("value", "a")
 
 let keyImgD = document.createElement("img")
 keyImgD.setAttribute("src", "./images/key-img-d.png")
+keyImgD.setAttribute("value", "d")
 
 let keyImgS = document.createElement("img")
 keyImgS.setAttribute("src", "./images/key-img-s.png")
+keyImgS.setAttribute("value", "s")
 
 let keyImgE = document.createElement("img")
 keyImgE.setAttribute("src", "./images/key-img-e.png")
+keyImgE.setAttribute("value", "e")
+
+let keyImgG = document.createElement("img")
+keyImgG.setAttribute("src", "./images/key-img-g.png")
+keyImgG.setAttribute("value", "g")
+console.log(typeof keyImgG.value)
+
+//check if key is pressed
+let isPressed = false;
+let keydown = function(e){ 
+  if(e.key){
+    isPressed = true;
+  } 
+}
+let keyup = function(e){
+  isPressed = false;
+}
 
 game = {
   score: 0,
-  timer: 1,
+  timer: 0,
   currKeyImg: [],
-  mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgS, keyImgD],
+  mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgS, keyImgD, keyImgG, keyImgG, keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgD, keyImgS, keyImgA],
   setUpTimer: function (time) {
     game.timer = time
     const timeInterval = setInterval(() => {
-      if (game.timer === 5) {
+      if (game.timer === 3) {
         clearInterval(timeInterval)
         // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
       } 
-      // if (game.timer < 3) {
-      //   console.log("Hey!")
-      //   score++
-      // } else if (game.timer > 2) {
-      //   console.log("oi!")
-      //   }
-      else {
+      if (isPressed) {
+        console.log("Hey!")
+        game.timer++
+        score++
+      } else {
         game.timer++
         } console.log(game.timer)
-      }, 1000)
+      }, 2000)
   },
   moveKey: function() { 
     let moveTime = 0;
@@ -125,6 +142,7 @@ game = {
         game.mary[moveTime].classList.add("key-pressed");
         // game.mary[i].setAttribute("data-value", i)
         console.log(game.mary[moveTime])
+        game.setUpTimer(0)
       moveTime++;
       } else { 
       clearInterval(interval);
@@ -217,7 +235,8 @@ function handleKey(e) {
 // }
 
 // document.addEventListener("keydown", )
-document.addEventListener("keydown", game.compare)
+document.addEventListener("keydown", keydown, false)
+document.addEventListener("keyup", keyup, false)
 
 //event listener for piano key functions
 document.addEventListener("keydown", handleKey)
