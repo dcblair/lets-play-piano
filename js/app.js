@@ -9,7 +9,7 @@ If your timing is right, you win 2 points!
 If you miss or press the wrong key, you lose 2 points.
 Don't let your score get to 0!
 
-Press the spacebar to start (press again to reset game)`)
+Press the start button to begin!`)
 */
 
 // enable audio
@@ -149,13 +149,17 @@ let game = {
       if (moveTime <= game.mary.length) { 
         document.querySelector(".range").appendChild(game.mary[moveTime])
         game.mary[moveTime].classList.add("key-pressed");
-        game.currKeyImg = game.mary[moveTime].alt;
-      moveTime++;
+        let msDelay = 2000
+        setTimeout(function() {
+          game.currKeyImg = game.mary[moveTime].alt;
+          console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
+          game.compare();
+        }, msDelay);
       } else if (moveTime = game.mary.length) { 
       clearInterval(interval);
       // game.win();
       }
-    }, 5000)
+    }, 3000)
   },
   hitKey: function() {
     game.mary[moveTime].remove("key-pressed")
@@ -167,9 +171,7 @@ let game = {
       console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
       game.score+= 5
       score.innerHTML =`${game.score}`
-      console.log(game.timer)
-      game.timer--
-    } else if (wasPressed && game.currKeyImg[0] !== game.currentKey) {
+    } else if (wasPressed && game.currKeyImg[0] != game.currentKey[0]) {
       game.score-= 5
       score.innerHTML =`${game.score}`
     } else {
@@ -181,10 +183,10 @@ let game = {
       audioContext.resume()
       game.moveKey()
       game.compare()
-      startButton.setAttribute("textContent")= "Restart!"
-      else if (startButton.textContent= "Restart!") {
-
-      }
+      startButton.textContent= "Restart!"
+    } else if (startButton.textContent= "Restart!") {
+      location.reload()
+      return false;
     }
   },
   win: function() {
@@ -242,6 +244,6 @@ document.addEventListener("keydown", game.handleKey)
 document.addEventListener("keydown", game.currKey)
 
 //space bar event listener for game start
-document.getElementById("startButton").addEventListener("onclick", game.start)
+document.getElementById("startButton").addEventListener("click", game.start)
 
 
