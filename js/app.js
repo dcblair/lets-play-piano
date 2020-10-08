@@ -109,10 +109,12 @@ let keyDown = function(e){
   if(e.key){
     wasPressed = true;
     game.currentKey = e.key
+    document.getElementById(`piano-${e.key}`).classList.add("piano-press")
   } 
 }
 let keyUp = function(e){
   wasPressed = false;
+  document.getElementById(`piano-${e.key}`).classList.remove("piano-press")
 }
 
 game = {
@@ -131,22 +133,25 @@ game = {
   setUpTimer: function (time) {
     game.timer = time
     const timeInterval = setInterval(() => {
-      if (game.timer === 5) {
-        clearInterval(timeInterval)
-        // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
-      } 
-      if (wasPressed && game.currKeyImg[0] === game.currentKey) {
+      // if (time === 5) {
+      //   clearInterval(timeInterval)
+      //   // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
+      // } 
+      if (wasPressed && game.currKeyImg[0] == game.currentKey) {
         console.log("Hey!")
         console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
         game.score+= 5
         score.innerHTML =`${game.score}`
+        console.log(game.timer)
         console.log(score)
       } else if (wasPressed && game.currKeyImg[0] !== game.currentKey) {
         game.score-= 5
         score.innerHTML =`${game.score}`
         console.log(score)
+      } else {
+        timer++
       }
-      }, 2000)
+      }, 1000)
   },
   moveKey: function() { 
     let moveTime = 0;
@@ -163,8 +168,8 @@ game = {
     }, 2000)
   },
   hitKey: function() {
-    game.mary.classList.remove("key-pressed")
-    game.mary.classList.add("correct-press")
+    game.mary[moveTime].remove("key-pressed")
+    game.mary[moveTime].add("correct-press")
 
   },
   compare: function() {
@@ -187,7 +192,6 @@ game = {
   handleKey: function(e) {
     if (e.key === "a") {
       audioC.play();
-      //let pianoKeyA = document.querySelector(".piano-key").classList.add("piano-press")
     }
     if (e.key === "w") {
       audioCSh.play();

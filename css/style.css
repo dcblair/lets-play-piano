@@ -108,14 +108,14 @@ body {
 .piano-press {
   display: absolute;
   width: 50px;
-  animation-name: press 10s;
+  animation: press 3s;
 }
 
 @keyframes press {
-  0%   {opacity: 1;}
-  25%  {opacity: .5}
-  50%  {opacity: .1}
-  100% {opacity: 1}
+  0%   {opacity: 1; }
+  25%  {opacity: .7; }
+  50%  {opacity: .7; }
+  100% {opacity: 1; }
 }
 
 .black-key {
