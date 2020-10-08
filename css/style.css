@@ -108,14 +108,14 @@ body {
 .piano-press {
   display: absolute;
   width: 50px;
-  animation: press 3s;
+  animation: press 3s ease-out;
 }
 
 @keyframes press {
-  0%   {opacity: 1; }
-  25%  {opacity: .7; }
-  50%  {opacity: .7; }
-  100% {opacity: 1; }
+  0%   {opacity: 1; filter: drop-shadow(0px black)}
+  25%  {opacity: .6; filter: drop-shadow(1px black)}
+  50%  {opacity: .5; filter: drop-shadow(2px black)}
+  100% {opacity: .9; filter: drop-shadow(0px black)}
 }
 
 .black-key {
@@ -124,3 +124,21 @@ body {
   width: 45px;
 }
 
+.button {
+  position: absolute;
+  background-color: #d9eeba;
+  color: black;
+  left: -50px;
+  top: 205px;
+  width: 100px;
+  padding: 10px 25px;
+  margin: 10px 0px;
+  border-radius: 6px;
+  border: 3px black;
+  transition: filter .7s ease;
+}
+
+.button:hover {
+  filter: brightness(95%);
+  box-shadow: 1px black;
+}

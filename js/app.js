@@ -74,12 +74,18 @@ let pianoContainer = document.createElement("div")
 pianoContainer.setAttribute("class", "pianoContainer")
 document.body.appendChild(pianoContainer)
 
-
 // create score text
 let score = document.createElement("div")
 score.setAttribute("class", "score")
 score.innerHTML="10"
 document.querySelector(".range").appendChild(score)
+
+// create start button
+let startButton = document.createElement("a")
+startButton.setAttribute("class", "button")
+startButton.setAttribute("id", "startButton")
+startButton.textContent= "Start!"
+score.appendChild(startButton)
 
 // create key images
 let keyImgA = document.createElement("img")
@@ -117,7 +123,7 @@ let keyUp = function(e){
   document.getElementById(`piano-${e.key}`).classList.remove("piano-press")
 }
 
-game = {
+let game = {
   score: 0,
   timer: 0,
   currKeyImg: [],
@@ -130,29 +136,13 @@ game = {
     let playedKey = e.key
     playedKey = game.currentKey
   },
-  setUpTimer: function (time) {
-    game.timer = time
-    const timeInterval = setInterval(() => {
-      // if (time === 5) {
-      //   clearInterval(timeInterval)
-      //   // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
-      // } 
-      if (wasPressed && game.currKeyImg[0] == game.currentKey) {
-        console.log("Hey!")
-        console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
-        game.score+= 5
-        score.innerHTML =`${game.score}`
-        console.log(game.timer)
-        console.log(score)
-      } else if (wasPressed && game.currKeyImg[0] !== game.currentKey) {
-        game.score-= 5
-        score.innerHTML =`${game.score}`
-        console.log(score)
-      } else {
-        timer++
-      }
-      }, 1000)
-  },
+  // setUpTimer: function () {
+  //   game.timer = game.mary.length
+  //   const timeInterval = setInterval(() => {
+      
+  //     }
+  //     }, 5000)
+  // },
   moveKey: function() { 
     let moveTime = 0;
     let interval = setInterval(function(e) { 
@@ -160,12 +150,12 @@ game = {
         document.querySelector(".range").appendChild(game.mary[moveTime])
         game.mary[moveTime].classList.add("key-pressed");
         game.currKeyImg = game.mary[moveTime].alt;
-        game.setUpTimer(0)
       moveTime++;
-      } else { 
+      } else if (moveTime = game.mary.length) { 
       clearInterval(interval);
+      // game.win();
       }
-    }, 2000)
+    }, 5000)
   },
   hitKey: function() {
     game.mary[moveTime].remove("key-pressed")
@@ -173,21 +163,35 @@ game = {
 
   },
   compare: function() {
+    if (wasPressed && game.currKeyImg[0] == game.currentKey[0]) {
+      console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
+      game.score+= 5
+      score.innerHTML =`${game.score}`
+      console.log(game.timer)
+      game.timer--
+    } else if (wasPressed && game.currKeyImg[0] !== game.currentKey) {
+      game.score-= 5
+      score.innerHTML =`${game.score}`
+    } else {
+      console.log("what?")
+    }
   },
   start: function(e) {
-    if (e.keyCode === 32) {
+    if (startButton.textContent === "Start!") {
       audioContext.resume()
       game.moveKey()
+      game.compare()
+      startButton.setAttribute("textContent")= "Restart!"
+      else if (startButton.textContent= "Restart!") {
+
+      }
     }
-      // else if ()
-      // new function const checkE = setInterval
-      // time = interval; set interval for 5 secs
-      // check var tied to e being pressed
-      // startTimer();
-      // timer++
-      // if (timer === 10) {
-      // stopTimer();
-      // }
+  },
+  win: function() {
+    alert(`Great Job! Your score is ${game.score}!`)
+  },
+  lose: function() {
+    alert(`Nice try! You'll get it next time!`)
   },
   handleKey: function(e) {
     if (e.key === "a") {
@@ -234,8 +238,10 @@ document.addEventListener("keyup", keyUp, false)
 //event listener for piano key functions
 document.addEventListener("keydown", game.handleKey)
 
+//event listener to track currently pressed key
 document.addEventListener("keydown", game.currKey)
 
 //space bar event listener for game start
-document.addEventListener("keypress", game.start)
+document.getElementById("startButton").addEventListener("onclick", game.start)
+
 
