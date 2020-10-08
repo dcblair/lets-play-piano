@@ -104,61 +104,63 @@ keyImgG.setAttribute("alt", "g")
 
 
 //check if key is pressed
-let isPressed = false;
-let keydown = function(e){ 
+let wasPressed = false;
+let keyDown = function(e){ 
   if(e.key){
-    isPressed = true;
+    wasPressed = true;
+    game.currentKey = e.key
   } 
 }
-let keyup = function(e){
-  isPressed = false;
+let keyUp = function(e){
+  wasPressed = false;
 }
 
 game = {
   score: 0,
   timer: 0,
   currKeyImg: [],
+  currentKey: [],
   mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgS, keyImgD, keyImgG, keyImgG, keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgD, keyImgS, keyImgA],
+  increaseScore: function() {
+
+  },
+  currKey: function(e) {
+    let playedKey = e.key
+    playedKey = game.currentKey
+  },
   setUpTimer: function (time) {
     game.timer = time
     const timeInterval = setInterval(() => {
-      if (game.timer === 3) {
+      if (game.timer === 5) {
         clearInterval(timeInterval)
         // this should be to remove document.querySelector(".squares").removeEventListener("click", handlePoke)
       } 
-      if (isPressed) {
+      if (wasPressed && game.currKeyImg[0] === game.currentKey) {
         console.log("Hey!")
-        game.timer++
-        score++
-      } else {
-        game.timer++
-        } console.log(game.timer)
+        console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
+        game.score+= 5
+        score.innerHTML =`${game.score}`
+        console.log(score)
+      } else if (wasPressed && game.currKeyImg[0] !== game.currentKey) {
+        game.score-= 5
+        score.innerHTML =`${game.score}`
+        console.log(score)
+      }
       }, 2000)
   },
   moveKey: function() { 
     let moveTime = 0;
-    let interval = setInterval(function() { 
+    let interval = setInterval(function(e) { 
       if (moveTime <= game.mary.length) { 
         document.querySelector(".range").appendChild(game.mary[moveTime])
         game.mary[moveTime].classList.add("key-pressed");
-        // game.mary[i].setAttribute("data-value", i)
-        console.log(game.mary[moveTime])
+        game.currKeyImg = game.mary[moveTime].alt;
         game.setUpTimer(0)
       moveTime++;
       } else { 
       clearInterval(interval);
-      
       }
     }, 2000)
-    // for (let i = 0; i < game.mary.length; i++) {
-    //   setTimeout(function() {
-    //   document.querySelector(".range").appendChild(game.mary[i])
-    //   game.mary[i].classList.add("key-pressed");
-    //   // game.mary[i].setAttribute("data-value", i)
-    //   console.log(game.mary[i])
-    //   game.setUpTimer(1)
-    //   }, 500)
-    // }
   },
   hitKey: function() {
     game.mary.classList.remove("key-pressed")
@@ -169,8 +171,10 @@ game = {
   },
   start: function(e) {
     if (e.keyCode === 32) {
-      
-      game.moveKey();
+      audioContext.resume()
+      game.moveKey()
+    }
+      // else if ()
       // new function const checkE = setInterval
       // time = interval; set interval for 5 secs
       // check var tied to e being pressed
@@ -179,68 +183,54 @@ game = {
       // if (timer === 10) {
       // stopTimer();
       // }
-    }
   },
-  
-}
-
-
-
-// currPress = "" ; global?
-function handleKey(e) {
-  if (e.key === "a") {
-    audioC.play();
-    let pianoKeyA = document.querySelector(".piano-key")
-    pianoKeyA.classList.remove("piano-key")
-    pianoKeyA.classList.add("piano-press")
-  }
-  if (e.key === "w") {
-    audioCSh.play();
-  }
-  if (e.key === "s") {
-    audioD.play();
-  } else if (e.key === "e") {
-    audioDSh.play();
-  }
-  if (e.key === "d") {
-    audioE.play();
-  } else if (e.key === "f") {
-    audioF.play();
-  }
-  if (e.key === "t") {
-    audioFSh.play();
-  } else if (e.key === "g") {
-    audioG.play();
-  } 
-  if (e.key === "y") {
-    audioGSh.play();
-  } else if (e.key === "h") {
-    audioA.play();
-  } 
-  if (e.key === "u") {
-    audioASh.play();
-  } else if (e.key === "j") {
-    audioB.play();
-  }
-  if (e.key === "k") {
-    audioCHi.play();
+  handleKey: function(e) {
+    if (e.key === "a") {
+      audioC.play();
+      //let pianoKeyA = document.querySelector(".piano-key").classList.add("piano-press")
+    }
+    if (e.key === "w") {
+      audioCSh.play();
+    }
+    if (e.key === "s") {
+      audioD.play();
+    } else if (e.key === "e") {
+      audioDSh.play();
+    }
+    if (e.key === "d") {
+      audioE.play();
+    } else if (e.key === "f") {
+      audioF.play();
+    }
+    if (e.key === "t") {
+      audioFSh.play();
+    } else if (e.key === "g") {
+      audioG.play();
+    } 
+    if (e.key === "y") {
+      audioGSh.play();
+    } else if (e.key === "h") {
+      audioA.play();
+    } 
+    if (e.key === "u") {
+      audioASh.play();
+    } else if (e.key === "j") {
+      audioB.play();
+    }
+    if (e.key === "k") {
+      audioCHi.play();
+    }
   }
 }
-
-// for (let i = 0; i < keyArray.length; i++) {
-
-// }
-
-// if (keyPressA > 4 || keyPressA < 6) {
-//   playerScore+= 5
-// }
 
 // document.addEventListener("keydown", )
-document.addEventListener("keydown", keydown, false)
-document.addEventListener("keyup", keyup, false)
+document.addEventListener("keydown", keyDown, false)
+document.addEventListener("keyup", keyUp, false)
 
 //event listener for piano key functions
-document.addEventListener("keydown", handleKey)
+document.addEventListener("keydown", game.handleKey)
+
+document.addEventListener("keydown", game.currKey)
 
 //space bar event listener for game start
 document.addEventListener("keypress", game.start)
