@@ -187,8 +187,12 @@ let game = {
   win: function() {
     if (score.innerHTML > 0) {
       alert(`Great Job! Your score is ${score.innerHTML}!`)
+      location.reload()
+      return false;
     } else {
       alert(`Nice try! You'll get it next time!`)
+      location.reload()
+      return false;
     }
   },
   handleKey: function(e) {
