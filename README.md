@@ -31,6 +31,37 @@ the score box towards the top right, a "volume slider", and the range in the cen
 * Javascript
 * CSS
 * HTML
+* Below is my favorite piece of code. Although it is a large chunk of code,
+it exemplifies a major turning point in coding Let's Play Piano. This is the
+logic that controls the point gauging system, as well as the iterating of
+key images.
+  - document.querySelector(".range").appendChild(game.mary[this.index])
+    game.mary[this.index].classList.add("key-pressed");
+    game.currKeyImg = game.mary[this.index].alt;
+    this.index++;
+    let moveTime = 0;
+    let interval = setInterval(function(e) { 
+      if (moveTime === 5000) { 
+      clearInterval(interval);
+      let el = document.querySelector(".key-pressed")
+      el.parentNode.removeChild(el)
+      game.sweetSpot = false;
+      if (game.index < game.mary.length) {
+        game.moveKey()
+      } else {
+        game.win();
+      }
+      } else if (moveTime > 200 && moveTime < 2000) {
+        console.log("sweet spot")
+        moveTime+= 500
+        game.sweetSpot = true;
+        game.mary[this.index].classList.add("correct-key");
+      } else {
+        moveTime+= 500
+        game.sweetSpot = false;
+      }
+    }, 500)
+  },
 
 
 ## Credits
