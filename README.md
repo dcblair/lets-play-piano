@@ -10,12 +10,12 @@ way to understand the layout of a piano's keys and learn how to play it.
 ![Screenshot1](screenshot1.png)
 ![Screenshot2](screenshot2.png)
 
-
-
 ## User Stories
-* Press start button to begin game
-  - After pressing, start button becomes restart button
-* The image of a computer key with corresponding letter appears over the game range
+* Press the start button to begin game
+  - After pressing, the start button becomes a restart button
+* The interface features a 13-key piano that can be played with the user's computer keyboard,
+the score box towards the top right, a "volume slider", and the range in the center
+* Once the game starts an image of a computer key with a letter on it appears over the game range
 * The key moves across screen from left to right
 * Watch as the key moves towards the green threshold of range
 * Pressing the corresponding letter key on the keyboard when the image is within the green zone wins points
@@ -31,7 +31,6 @@ way to understand the layout of a piano's keys and learn how to play it.
 * Javascript
 * CSS
 * HTML
-* MD
 
 
 ## Credits
