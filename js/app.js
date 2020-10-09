@@ -115,6 +115,7 @@ let keyDown = function(e){
   if(e.key){
     wasPressed = true;
     game.currentKey = e.key
+    game.compare()
     document.getElementById(`piano-${e.key}`).classList.add("piano-press")
   } 
 }
@@ -124,65 +125,59 @@ let keyUp = function(e){
 }
 
 let game = {
+  sweetSpot: false,
   score: 0,
   timer: 0,
+  index: 0,
   currKeyImg: [],
   currentKey: [],
   mary: [keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgS, keyImgD, keyImgG, keyImgG, keyImgD, keyImgS, keyImgA, keyImgS, keyImgD, keyImgD, keyImgD, keyImgD, keyImgS, keyImgS, keyImgD, keyImgS, keyImgA],
-  increaseScore: function() {
-
-  },
   currKey: function(e) {
     let playedKey = e.key
     playedKey = game.currentKey
   },
-  // setUpTimer: function () {
-  //   game.timer = game.mary.length
-  //   const timeInterval = setInterval(() => {
-      
-  //     }
-  //     }, 5000)
-  // },
   moveKey: function() { 
+    document.querySelector(".range").appendChild(game.mary[this.index])
+    game.mary[this.index].classList.add("key-pressed");
+    game.currKeyImg = game.mary[this.index].alt;
+    this.index++;
     let moveTime = 0;
     let interval = setInterval(function(e) { 
-      if (moveTime <= game.mary.length) { 
-        document.querySelector(".range").appendChild(game.mary[moveTime])
-        game.mary[moveTime].classList.add("key-pressed");
-        let msDelay = 2000
-        setTimeout(function() {
-          game.currKeyImg = game.mary[moveTime].alt;
-          console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
-          game.compare();
-        }, msDelay);
-      } else if (moveTime = game.mary.length) { 
+      if (moveTime === 5000) { 
       clearInterval(interval);
-      // game.win();
+      let el = document.querySelector(".key-pressed")
+      el.parentNode.removeChild(el)
+      game.sweetSpot = false;
+      if (game.index < game.mary.length) {
+        game.moveKey()
+      } else {
+        game.win();
       }
-    }, 3000)
-  },
-  hitKey: function() {
-    game.mary[moveTime].remove("key-pressed")
-    game.mary[moveTime].add("correct-press")
-
+      } else if (moveTime > 200 && moveTime < 2000) {
+        console.log("sweet spot")
+        moveTime+= 500
+        game.sweetSpot = true;
+        game.mary[this.index].classList.add("correct-key");
+      } else {
+        moveTime+= 500
+        game.sweetSpot = false;
+      }
+    }, 500)
   },
   compare: function() {
-    if (wasPressed && game.currKeyImg[0] == game.currentKey[0]) {
+    if (game.sweetSpot && game.currKeyImg[0] == game.currentKey[0]) {
       console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
-      game.score+= 5
-      score.innerHTML =`${game.score}`
-    } else if (wasPressed && game.currKeyImg[0] != game.currentKey[0]) {
-      game.score-= 5
+      game.score+= 1
       score.innerHTML =`${game.score}`
     } else {
-      console.log("what?")
+      game.score-= 1
+      score.innerHTML =`${game.score}`
     }
   },
   start: function(e) {
     if (startButton.textContent === "Start!") {
       audioContext.resume()
       game.moveKey()
-      game.compare()
       startButton.textContent= "Restart!"
     } else if (startButton.textContent= "Restart!") {
       location.reload()
@@ -190,10 +185,11 @@ let game = {
     }
   },
   win: function() {
-    alert(`Great Job! Your score is ${game.score}!`)
-  },
-  lose: function() {
-    alert(`Nice try! You'll get it next time!`)
+    if (score.innerHTML > 0) {
+      alert(`Great Job! Your score is ${score.innerHTML}!`)
+    } else {
+      alert(`Nice try! You'll get it next time!`)
+    }
   },
   handleKey: function(e) {
     if (e.key === "a") {
@@ -245,5 +241,4 @@ document.addEventListener("keydown", game.currKey)
 
 //space bar event listener for game start
 document.getElementById("startButton").addEventListener("click", game.start)
-
 
