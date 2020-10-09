@@ -154,7 +154,6 @@ let game = {
         game.win();
       }
       } else if (moveTime > 200 && moveTime < 2000) {
-        console.log("sweet spot")
         moveTime+= 500
         game.sweetSpot = true;
         game.mary[this.index].classList.add("correct-key");
@@ -166,7 +165,6 @@ let game = {
   },
   compare: function() {
     if (game.sweetSpot && game.currKeyImg[0] == game.currentKey[0]) {
-      console.log(`${game.currKeyImg[0]} and ${game.currentKey}`)
       game.score+= 1
       score.innerHTML =`${game.score}`
     } else {
